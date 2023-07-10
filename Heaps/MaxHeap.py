@@ -1,79 +1,50 @@
 
-
-'''
-def heapify(heap):
-    idx=len(heap)-1
-    if len(heap)==1:
-        return 0
-    
-    while idx>=0:
-        parent = int((idx-1)/2)
-        if heap[parent]<heap[idx]:
-            heap[parent],heap[idx]=heap[idx],heap[parent]
-            idx=parent
-        else:
-            break
-
-
-
-
-if __name__=="__main__":
-    
-    lst=list(map(int,input("Enter the numbers :").split()))
-
-    heap =[]
-
-    for num in lst:
-        heap.append(num)
-        heapify(heap)
-        print ("Heapified : ",heap)
-    
-    print("Finally ", heap)
-
-'''
-
-#########################################################
-
-
-class Heap :
-    
+import heapq
+class MaxHeap:
     def __init__(self):
-        self.heap=[]
-    
-    def __init__(self,lst):
-        self.heap=lst
-    
+        pass
 
-    def heapify(self,idx):
-
-        if idx <1:
-            return
-        
-        while idx>0:
-
-            parent = int((idx-1)/2)
-
-            if self.heap[parent]<self.heap[idx]:
-                self.heap[parent],self.heap[idx]=self.heap[idx],self.heap[parent]
-                idx = parent
-            
+    def get_maxofthree_idx(self, lst, par, lchild = 0, rchild = 0):
+        lchild = 2*par + 1
+        rchild = 2*par + 2
+        if rchild < len(lst):
+            if lst[lchild] > lst[rchild]:
+                if lst[lchild] > lst[par]:
+                    return lchild
             else:
-                break
+                if lst[rchild] > lst[par]:
+                    return rchild
+        
+        if lchild < len(lst):
+            if lst[lchild] > lst[par]:
+                return lchild
+        return par
     
-    def full_heapify(self):
-        print("Fully heapifying")
-        l =len(self.heap)
+    def swap(self, lst, idx1, idx2):
+        lst[idx1], lst[idx2] = lst[idx2], lst[idx1]
+        return
 
-        for i in range(l):
-            self.heapify(i)
-            print("idx : ",i,self.heap)
+    def heapify(self, lst):
+        for i in range(len(lst)//2, -1, -1):
+            mxidx = self.get_maxofthree_idx(lst, i)
+            self.swap(lst, i, mxidx)
 
 
-lst =list(map(int, input("Enter nums : ").split()))
 
-heap_inst = Heap(lst)
-heap_inst.full_heapify()
-print ("lst : ",lst)
+
+if __name__ == "__main__":
+    lst =list(map(int, input("Enter nums : ").split(',')))
+    lst_cpy1 = lst[:]
+    lst_cpy2 = lst[:]
+    lst_cpy2 = [ele*-1 for ele in lst_cpy2] #invert to get max heap
+    mxheap = MaxHeap()
+    mxheap.heapify(lst_cpy1)
+    heapq.heapify(lst_cpy2)
+    lst_cpy2 = [ele*-1 for ele in lst_cpy2] #invert back again
+    print("MxHeap  : ", lst_cpy1)
+    print("MxHeapq : ", lst_cpy2    )
+
+
 
 
 
