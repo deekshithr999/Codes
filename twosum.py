@@ -49,32 +49,26 @@ Submissions
 '''
 
 
-'''
-Sol 1 :
 
-Using HashTable 
+class Solution:
+    '''
+    Sol 1 :
 
-TC : O(n)
-SC : O(n)
-'''
-class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        dct={}
-        fin =0
+    Using HashTable 
+
+    TC : O(n)
+    SC : O(n)
+    '''
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        prev_dt = {}
         for i in range(len(nums)):
-            if (target-nums[i]) in dct:
-                for j in range(0,i):
-                    if nums[j]==(target - nums[i]):
-                        return [i,j]
+            idx = prev_dt.get(target-nums[i],-1)
+            if idx != -1:
+                return [i, idx]
             else:
-                dct.setdefault(nums[i],0)
+                prev_dt[nums[i]]=i
+        return [0,0]
         
-        return []
                 
 
 '''
@@ -102,3 +96,12 @@ class Solution(object):
                     return [i,j]
         return []
                 
+
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        for i in range(len(nums)):
+            for j in range(i+1, len(nums)):
+                if nums[i]+nums[j]==target:
+                    return [i,j]
+        return [0,0]
