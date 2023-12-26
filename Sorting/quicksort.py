@@ -1,9 +1,45 @@
+def quicksort(arr, low, high):
+    if low < high:
+        pivot_index = partition(arr, low, high)
+        quicksort(arr, low, pivot_index - 1)
+        quicksort(arr, pivot_index + 1, high)
+
+def partition(arr, low, high):
+    pivot = arr[low]
+    i = low + 1
+    j = high
+    while True:
+        while i <= j and arr[i] <= pivot:
+            i += 1
+        while i <= j and arr[j] >= pivot:
+            j -= 1
+        if i > j:
+            break
+        arr[i], arr[j] = arr[j], arr[i]
+    arr[low], arr[j] = arr[j], arr[low]
+    return j
+
+# Example usage:
+arr = [5, 2, 9, 1, 7, 6, 3]
+quicksort(arr, 0, len(arr) - 1)
+print(arr)
+
+
+
+
+
+
+
 '''
 
 TC: O(nlogn)
 WorstCase: O(n^2)
 SC: O(1)
 '''
+
+
+
+
 class QuickSort1:
     def quicksort(self,lst, left, right):
 
@@ -33,39 +69,6 @@ class QuickSort1:
         return
 
 
-
-class Classic_Code_QuickSort(object):
-
-    def quicksort(self,lst,left,right):
-        if left <right: #handling left & right edge case 
-            partition1 = self.partition(lst,left,right)
-        
-            self.quicksort(lst,left,partition1-1)
-            self.quicksort(lst,partition1+1,right)
-    
-    def partition(self,lst,left,right):
-
-        pivot = left
-        l=left
-        r=right
-
-        while l<r:
-            while l<=right: #see this = Edge Case
-                if lst[l]>lst[pivot]:
-                    break
-                l+=1
-            
-            while r>left: #see this, removed = from here to compensate the below stmt
-                if lst[r]< lst[pivot]:
-                    break
-                r-=1
-            
-            if l<r:
-                lst[l],lst[r] = lst[r],lst[l]
-        
-        lst[r],lst[pivot] = lst[pivot],lst[r]
-
-        return r
 
 
 
