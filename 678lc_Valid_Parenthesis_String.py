@@ -62,5 +62,4 @@ class Solution:
             else:
                 pass
 
-        return True
-                            
+        return True               
