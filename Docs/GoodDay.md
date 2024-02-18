@@ -1,10 +1,10 @@
 1. ### Coin Change Problem
-
-> [[Leet Code 322. Coin Change](https://leetcode.com/problems/coin-change/) | DP ] 
-> 
-> **Approach:**  
->     Given Amount=11, coins = [1,2,5]. Calculate min denominations
->     Each amount can be written as coin+dp[remaining_amount]
+   
+   > [[Leet Code 322. Coin Change](https://leetcode.com/problems/coin-change/) | DP ] 
+   > 
+   > **Approach:**  
+   >     Given Amount=11, coins = [1,2,5]. Calculate min denominations
+   >     Each amount can be written as coin+dp[remaining_amount]
 
 ---
 
