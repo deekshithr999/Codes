@@ -17,14 +17,14 @@ class Solution:
         heapq.heappush(minHeap, (0,S))
         vis = [0]*V
         while minHeap:
-            FromC, FromV = heapq.heappop(minHeap)
-            if vis[FromV]:
+            fromC, fromV = heapq.heappop(minHeap)
+            if vis[fromV]:
                 continue
-            vis[FromV]=1
-            for ele in adj[FromV]:
+            vis[fromV]=1
+            for ele in adj[fromV]:
                 toV, toW = ele[0], ele[1]
-                if dist[toV]> FromC + toW:
-                    dist[toV]= FromC+toW
+                if dist[toV]> fromC + toW:
+                    dist[toV]= fromC+toW
                     heapq.heappush(minHeap, (dist[toV], toV))
                     
         return dist
@@ -42,19 +42,19 @@ class Solution:
         dist[S]=0
         
         while True:
-            FromV, FromC = -1, float('inf')
+            fromV, fromC = -1, float('inf')
             # Select the vertex with min edge weight & not visited
             for v in range(V):
-                if not vis[v] and dist[v] < FromC:
-                    FromV, FromC = v, dist[v]
+                if not vis[v] and dist[v] < fromC:
+                    fromV, fromC = v, dist[v]
             
-            if FromV == -1: # All are visited & there are few un reachable
+            if fromV == -1: # All are visited & there are few un reachable
                 return dist
-            vis[FromV]=1
-            for i in adj[FromV]:
+            vis[fromV]=1
+            for i in adj[fromV]:
                 toV, toW = i[0], i[1]
-                if dist[toV] > FromC + toW:
-                    dist[toV]= FromC+toW
+                if dist[toV] > fromC + toW:
+                    dist[toV]= fromC+toW
         
         return dist 
 

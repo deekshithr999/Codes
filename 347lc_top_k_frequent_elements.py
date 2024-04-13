@@ -1,25 +1,51 @@
+class Solution:
+    '''
+    TC: O(n)
+    SC: O(m) #len of array
+    '''
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        res = []
+        freqLst = [[] for _ in range(len(nums)+1)]
+        dt = {}
+        for num in nums:
+            dt[num] = dt.get(num,0)+1
+        
+        for num, freq in dt.items():
+            freqLst[freq].append(num)
+        
+        for subfLst in freqLst[::-1]:
+            for ele in subfLst:
+                if not k:
+                    return res
+                res.append(ele)
+                k -= 1
+        return res
+
 
 class Solution:
     '''
-    
+    Using Min Heap
+    TC: O(nlogk)
+    SC: O(k)
     '''
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         dt = {}
+        minHeap = []
         res = []
         for num in nums:
-            dt[num] = dt.get(num,0)+1
-        arr = [[] for i in range(len(nums)+1)]
-        for key, val in dt.items():
-            arr[val].append(key)
-        rem = k
-        for i in range(len(arr)-1,-1,-1):
-            if len(arr[i])==0:
+            dt[num] = dt.get(num, 0)+1
+
+        for num,freq in dt.items():
+            if len(minHeap)<k:
+                heapq.heappush(minHeap, (freq, num))
                 continue
-            for kk in range(len(arr[i])):
-                if rem == 0:
-                    return res
-                res.append(arr[i][kk])
-                rem -=1
+            top = minHeap[0]
+            if top[0]< freq:
+                heapq.heappop(minHeap)
+                heapq.heappush(minHeap, (freq, num))
+        
+        for _, num in minHeap:
+            res.append(num)
         return res
 
 
@@ -38,6 +64,3 @@ class Solution:
         lsttup.sort(key=lambda x:x[1], reverse = True)
         res = [ lsttup[i][0] for i in range(k)]
         return res
-
-
-        
