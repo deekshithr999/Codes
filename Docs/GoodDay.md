@@ -359,5 +359,19 @@
     > Value in a given cell is determined by, if a char at that postion matches with any string, then look for the match before.... blahh blahh..
     > 
     > **Approach 2:** Using Memoization
+
+---
+
+15. #### Increasing Triplet SubSequence
+    
+    > [ [334.Increasing Triplet Subsequence](https://leetcode.com/problems/increasing-triplet-subsequence/) | | LC-75]
     > 
+    > **Approach 1:** Take minArr from left, maxArr from right.
+    > TC: O(n)
+    > SC: O(n)
     > 
+    > **Approach 2:** Using 2 Vars
+    > TC: O(n)
+    > SC: O(1)
+    > 
+    > *idea:* `first` var stores the lowest, `second` var stores the second lowest, edge case: `if(curr > second) ` which return `true`. Imaginee... . thinked how store previous small vals, thats where 2nd var comes into playy..
