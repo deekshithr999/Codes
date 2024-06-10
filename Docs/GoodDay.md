@@ -415,3 +415,37 @@
     >    5 6 1 ***2*** 3 4 - right sorted array
 
 ---
+
+19. #### SubSet Generation
+    
+    > [ [78. Subsets](https://leetcode.com/problems/subsets/) | Sub Sets| ]
+    > 
+    > For each element, we have choice of including/ excluding the element.
+    > 
+    > ```python
+    > class Solution:
+    >     def subsets(self, nums: List[int]) -> List[List[int]]:
+    >         res = []
+    > 
+    >         def genSubSet(idx, sset):
+    >             if idx == len(nums):
+    >                 res.append(sset[:])
+    >                 return
+    >             genSubSet(idx+1, sset)
+    >             sset.append(nums[idx])
+    >             genSubSet(idx+1, sset)
+    >             sset.pop()
+    >         genSubSet(0, [])
+    >         return res 
+    > ```
+    
+    ---
+    
+    20. #### Topological Sorting
+        
+        > [ [GFG Topological Sorting ]([Topological sort | Practice | GeeksforGeeks](https://www.geeksforgeeks.org/problems/topological-sort/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=bottom_sticky_on_article)) | Topological Sorting | ]
+        > DFS Method
+        > Stack to store the traverse order
+        > After each traversal of vertex, push to stack, return pop of stack for the topological order.
+        > Imagine in dfs, all childs are traversed, before pushing to the stack.
+        > 

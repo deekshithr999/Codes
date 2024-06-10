@@ -1,5 +1,8 @@
 
 class Solution:
+    '''
+    Din't quite get though
+    '''
     def permute(self, nums: List[int]) -> List[List[int]]:
         res = []
         def genPerms(lidx, ridx, subSet):
@@ -15,7 +18,27 @@ class Solution:
 
         genPerms(0,0,nums)
         return res
-        
+
+class Solution:
+    '''
+    Adding each element to the subset progressively
+    {}
+    {1}
+    {2,1}, {1,2}
+    {3,2,1}, {2,3,1}, {2,1,3}, {3,1,2}, {1,3,2}, {1,2,3}
+    '''
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        resSet = [[]]
+        for num in nums:
+            newResSet = []
+            for subSet in resSet:
+                for pos in range(len(subSet)+1):
+                    newSubSet = subSet[:]
+                    newSubSet.insert(pos, num)
+                    newResSet.append(newSubSet)
+            resSet = newResSet
+        return resSet
+               
 
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
@@ -32,17 +55,4 @@ class Solution:
         genPerms(0, nums)
         return res
 
-class Solution:
-    def permute(self, nums: List[int]) -> List[List[int]]:
-        
-        res =[]
-        def genPerms(cIdx, subSet):
-            if cIdx == len(nums):
-                res.append(subSet)
-                return
-            for i in range(cIdx, len(nums)):
-                subSetcpy = subSet.copy()
-                subSetcpy[i], subSetcpy[cIdx] = subSetcpy[cIdx], subSetcpy[i]
-                genPerms(cIdx+1, subSetcpy)
-        genPerms(0, nums)
-        return res
+

@@ -1,3 +1,5 @@
+base(./cpp_images)
+
 1. #### "Extern" KeyWord
 
 > ****file1.h (header file)****
@@ -195,8 +197,86 @@
 
 13. #### Operator precedence and Associativity
     
-    > ![](D:\Codes\Docs\c++%20images\operator%20precedence%20.png)
+    > <img src="./cpp_images/op.jpg" title="" alt="Operator precedence" width="800">
 
-14. #### Character functions
+14. #### Cstyle Strings
     
-    > ![](C:\Users\zen\AppData\Roaming\marktext\images\2024-05-20-17-42-52-image.png)
+    > <img title="" src="./cpp_images/character_functions.jpg" alt="character_funcions" width="680" data-align="inline">
+    > 
+    > <img src="./cpp_images/cstyle_string_functions.jpg" title="" alt="csytle functions" width="712">
+    > 
+    > **Errors in initializing csytle string:**
+    > 
+    > <img src="./cpp_images/cstyle_string_error.jpg" title="" alt="" width="584">
+
+---
+
+15. #### C++ Strings
+    
+    > ```cpp
+    > #include<string>
+    > string s1 {"Apple"};
+    > string s2(10, 'X'); // XXXXXXXXXX
+    > cout<< s2.length()<<endl;
+    > ```
+    > 
+    > In cpp, strings are both mutable and immutable. Using const string makes immutable.
+    > 
+    > ```cpp
+    > s1 = "Frank";
+    > s1[0] = 'c'; //valid
+    > 
+    > 
+    > 
+    > // errors
+    > s1 = "hey"
+    > 
+    > cout << "greet "+ s1 << endl // works fine
+    > cout << "greet " + " me " + s1 // error why? '+' operator is overloaded and "greet" is cstyle string
+    > // so "gree "+ "me" overloaded by + doesn't work on csytle strings
+    > 
+    > s1.substr(0,2) // he
+    > s1.erase(0,1)//ey
+    > size_t pos = s1.find(word)// if not found returns pos = string::npos
+    > 
+    > string fullname;
+    > getline(cin, fullname) // handles spaces or stops until enter
+    > 
+    > s1.insert(pos, " ") // read it as insert at postion pos with char c
+    > str.find('o', 3); // find a char o start search from idx 3
+    > str.compare()
+    > ```
+
+---
+
+16. #### Functions
+    
+    > 1. **prototype:** void fun( int var1, int var2); //valid
+    >               void func(int, int); //valid
+    > 
+    > 2. **Default values for func:**
+    >    Can be passed declared either in prototype (or) in function definition. Not in both
+    >    
+    >    *Note:* Default values should be at the tail of the func def
+
+---
+
+17. #### Static Variable
+    
+    > * The static variable is shared among all instances of a class
+    > 
+    > * *Static variable persists during the entire program*.
+    > 
+    > * Static variables are initialized only once.
+    > 
+    > * It can be modified **MODIFIED**
+    > 
+    > * ```cpp
+    >   void func(){
+    >       static int num {500};
+    >       cout<< "num = "<< num<<endl;
+    >       num += 500;
+    >   }
+    >   func() // prints num = 500
+    >   func() // prints num = 1000; // won't be initialized again to 500
+    >   ```
