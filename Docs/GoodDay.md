@@ -448,4 +448,3 @@
         > Stack to store the traverse order
         > After each traversal of vertex, push to stack, return pop of stack for the topological order.
         > Imagine in dfs, all childs are traversed, before pushing to the stack.
-        > 
