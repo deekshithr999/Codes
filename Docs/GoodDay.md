@@ -24,13 +24,18 @@
 
 3. #### Maximum Product SubArray
    
-   > [[152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/) | DP ]
+   > [[152. Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/) | DP | NC-75]
+   > 
+   > **Approch Best & Easy:** Similar to kadanes algorithm
+   > calculate maxSum from left->right and right->left. covers Cases (1,2,3, -6, 8, 9)
+   > look at the code.
+   > *Idea: Since Issue arises only when there is a `single` negative value need right -> left Approach.*
    > 
    > **Approach 1: Uing 2 ptr Approach (l, r)**
    > 
    > There are 3 number types `(+ve, -ve, 0)`. whenever a `0` is encountered, the max_product will be `0` or +ve. 
    > If a -ve is encountered there can be -ve number towards the right so Keep Adding. *Brief:* i) right++ does calculate max_prod (1,2,3,-4,7). Here (1,2,3) is calculated.
-   >           ii) left++ does 7. **Approach 2:** Using Max_prod & Min_Prod Approach   
+   >           ii) left++ does
    > 
    > **Approach 2: Using Max_prod & Min_prod Approach**
    > 
@@ -378,7 +383,28 @@
 
 ---
 
-16. #### Construct Binary Tree from Preorder and Inorder Traversal
+16. #### Longest Increasing SubSequence
+    
+    > [ [Longest Increasing Subsequence - LeetCode](https://leetcode.com/problems/longest-increasing-subsequence/) , [Longest Increasing Subsequence Problem | Techie Delight](https://www.techiedelight.com/longest-increasing-subsequence/)  | DP, NON-DP, NC-75 ]
+    > 
+    > *Approach 1*: Using DP TC: O(n^2), SC: O(n)
+    > While Traversing look for the num smaller than curr num [ 1 2 0 3]-> edge case 3 shld take 2 not 0.
+    > 
+    > *Approach 2:* Non-DP Approach TC: O(nlogn), SC: O(n) look at the code [Awesome Code]
+    > ex: {2, 6, 3, 4, 1, 2, 9, 5, 8}
+    > Initialize to an empty set S = {}
+    > 
+    > Inserting 2 —- S = {2} – New largest LIS  
+    > Inserting 6 —- S = {2, 6} – New largest LIS  
+    > Inserting 3 —- S = {2, 3} – Replaced 6 with 3  
+    > Inserting 4 —- S = {2, 3, 4} – New largest LIS  
+    > Inserting 1 —- S = {1, 3, 4} – Replaced 2 with 1  
+    > Inserting 2 —- S = {1, 2, 4} – Replaced 3 with 2  
+    > Inserting 9 —- S = {1, 2, 4, 9} – New largest LIS  
+    > Inserting 5 —- S = {1, 2, 4, 5} – Replaced 9 with 5  
+    > Inserting 8 —- S = {1, 2, 4, 5, 8} – New largest LIS
+
+17. #### Construct Binary Tree from Preorder and Inorder Traversal
     
     > [ [Construct Binary Tree from Preorder and Inorder Traversal](https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/) | Trees | NC-75 ]
     > Approach:
@@ -448,3 +474,33 @@
         > Stack to store the traverse order
         > After each traversal of vertex, push to stack, return pop of stack for the topological order.
         > Imagine in dfs, all childs are traversed, before pushing to the stack.
+
+---
+
+21. #### Sort an array of 0’s, 1’s, and 2’s (Dutch National Flag Problem)
+    
+    > [[Sort an array of 0s, 1s and 2s | Practice | GeeksforGeeks](https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1) | Arrays, 3 Pointer| ]
+    > 
+    > * Maintain 3 pointers l,mid, r
+    > 
+    > * 0 0 0 0 0 1 1 1 1 1   2      2 2 2 2
+    >   
+    >             l          m,e
+    > 
+    > ```python
+    > class Solution:
+    >     def sort012(self,arr,n):
+    >         # code here
+    >         l,r,mid = 0, n-1, 0
+    >         pivot = 1 # pivot element
+    >         while mid <= r:
+    >             if arr[mid]<pivot:
+    >                 arr[mid], arr[l] = arr[l], arr[mid]
+    >                 mid += 1
+    >                 l += 1
+    >             elif arr[mid]>pivot:
+    >                 arr[mid], arr[r] = arr[r], arr[mid]
+    >                 r -= 1
+    >             else:
+    >                 mid += 1
+    > ```

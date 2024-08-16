@@ -1,3 +1,24 @@
+
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        resMax = nums[0]
+
+        prod = 1
+        for i in range(len(nums)):
+            prod = prod*nums[i]
+            resMax = max(resMax, prod)
+            if not prod:prod=1
+        
+        prod = 1
+        for j in range(len(nums)-1,-1,-1):
+            prod *=nums[j]
+            resMax = max(resMax, prod)
+            if not prod: prod=1
+        return resMax
+
+
+        
+
 class Solution:
     '''
     TC: O(n)
@@ -20,39 +41,28 @@ class Solution:
 
 
 class Solution:
-    '''
-    TC: O(n)
-    SC: O(1)
-    '''
     def maxProduct(self, nums: List[int]) -> int:
-        max_prod = nums[0]
-        l,r = 0,0
-        curr_prod = 1
-        while r < len(nums):
-            if nums[r]==0:
-                while l<r:
-                    if l+1 == r:
-                        curr_prod = nums[l]
-                    else:
-                        curr_prod = curr_prod // nums[l]
-                    max_prod = max(max_prod, curr_prod)
-                    l += 1
-                max_prod = max(max_prod, 0)
-                l += 1
-                curr_prod = 1
-            else:
-                curr_prod *= nums[r]
-                max_prod = max(max_prod, curr_prod)
-            # print("max_sum, idx", max_prod, r)
-            r += 1
+        if len(nums)==1:return nums[0]
+        curProd = 1
+        maxProd = nums[0] 
+        l = 0
+        for i in range(len(nums)):
+            if nums[i] == 0: #handle this
+                while l < i-1: # [-6, 0] , [2, 0]
 
-        if curr_prod >0:
-            return max_prod
-        while l < r:
-            if l+1 == r:
-                curr_prod = nums[l]
+                    curProd = curProd//nums[l]
+                    maxProd = max(maxProd, curProd)
+                    l+=1
+                maxProd = max(maxProd, 0)
+                curProd =1 
+                l = i+1
             else:
-                curr_prod = curr_prod // nums[l]
-            max_prod = max(max_prod, curr_prod)
-            l += 1
-        return max_prod
+                curProd *= nums[i]
+                maxProd = max(maxProd, curProd)
+        
+        while l < len(nums)-1: #handle last negative
+            curProd = curProd//nums[l]
+            l+=1
+            maxProd = max(maxProd, curProd)
+        return maxProd
+        

@@ -1,3 +1,17 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        majorEle = 1
+        cnt = 0
+
+        for num in nums:
+            if num == majorEle:cnt+=1
+            elif cnt: cnt-=1
+            else:
+                cnt=1
+                majorEle = num
+        return majorEle
+
+
 '''
 link : https://leetcode.com/problems/majority-element-ii/
 
@@ -110,7 +124,7 @@ Sol 3:
 
 Use the hashmap /dict to trace the #occurances
 
-TC: O(1)
+TC: O(n)
 SC: O(n)
 '''
                 
